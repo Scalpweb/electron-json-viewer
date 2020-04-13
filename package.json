@@ -1,0 +1,39 @@
+{
+  "name": "JSONViewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/electron.js",
+  "scripts": {
+    "prepare": "tsc src/electron.ts --outDir ./dist/",
+    "build": "npm run prepare && webpack --config ./webpack.config.js",
+    "start": "npm run build && electron ./dist/electron.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Pascal Scalpweb Mugnier",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "electron": "^8.2.1",
+    "electron-builder": "^22.4.1",
+    "html-webpack-plugin": "^4.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "react-json-view": "^1.19.1"
+  },
+  "build": {
+    "appId": "com.scalpian.jsonviewer",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*"
+    ]
+  }
+}
