@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import ReactJson from "react-json-view";
 import { readFileSync } from "fs";
 
-const remote = require("electron").remote;
+const { remote } = require("electron");
 
 const Index = () => {
   const [text, setText] = React.useState("{}");
@@ -12,17 +12,21 @@ const Index = () => {
     try {
       setText(event.target.value);
       setJson(JSON.parse(event.target.value));
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   React.useEffect(() => {
-    const last: string = remote.process.argv[remote.process.argv.length - 1];
+    const last: string = window.location.search.substr(8);
     if (last.endsWith(".json")) {
       try {
         const data = readFileSync(last, "utf-8");
         setJson(JSON.parse(data));
         setText(data);
-      } catch {}
+      } catch (e) {
+        console.log(e);
+      }
     }
   }, []);
 
